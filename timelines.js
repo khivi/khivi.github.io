@@ -84,8 +84,6 @@ function drawGraph() {
       chart(element);
   }
 
-  var sideBar = document.getElementById("sidebarContainer");
-  sideBar.parentNode.removeChild(sideBar);
   setData("Programming Languages", 1, data.lang);
   setData("Operating Systems", 12,  data.os);
 }
