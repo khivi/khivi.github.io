@@ -15,7 +15,7 @@ function drawGraph() {
       var date;
       var dates = [];
       var days = this.diffDays(endDate);
-      for (d = 0; d < days; d = d + 30) { 
+      for (d = 0; d < days; d = d + 365) { 
           date = this.addDays(d);
           dates.push(date);
       }
@@ -66,26 +66,28 @@ function drawGraph() {
   var body = document.getElementById('content');
   var color = d3.scale.category20();
 
-  var getChart = function(number) { 
+  var getChart = function() { 
       var chart = d3.chart.eventDrops()
-      .width(700)
+      .width(1000)
       .eventLineColor(function(datum, index) { 
           return color(index);
       })
-      .start(new Date(1971,6,1));
+      .start(new Date(1985,1,1))
+      .end(new Date(2020,1,1));
       return chart;
   }
 
-  var setData = function(name, number, data) { 
-      var chart = getChart(number);
+  var setData = function(name, data) { 
+      var chart = getChart();
       var element = d3.select(body).append('div');
       element.append('h2').html(name);
       element = element.append('div').datum(data);
       chart(element);
+      d3.select(body).selectAll('svg g.extremum').remove();
   }
 
-  setData("Programming Languages", 1, data.lang);
-  setData("Operating Systems", 12,  data.os);
+  setData("Programming Languages", data.lang);
+  setData("Operating Systems", data.os);
 }
 
 window.onload=drawGraph;
