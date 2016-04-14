@@ -64,6 +64,7 @@ body {
 	margin-bottom: 16px;
 }
 
+
 #profile-photo {}
 
 /* CLASSED */
@@ -143,6 +144,21 @@ h1.masthead-brand {
   border-bottom-color: #581a08;
 }
 
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus {
+  background-color: transparent;
+  border-bottom-color: #581a08;
+  border-bottom-color: rgba(88, 26, 8, .8);
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  background-color: transparent;
+  color: #581a08;
+  border-bottom-color: #581a08;
+  border-bottom-color: rgba(88, 26, 8, .8);
+}
+
 .header {
 	padding-bottom: 10px;
 	margin-bottom: 15px;
@@ -152,6 +168,11 @@ h1.masthead-brand {
 	position:static;
 	height:100%;
 }
+
+.writing-content {
+	margin-top: 16px;
+}
+
 
 
 @media (min-width: 480px) {
