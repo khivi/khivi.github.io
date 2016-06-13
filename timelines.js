@@ -1,22 +1,24 @@
 function drawGraph() {
   Date.prototype.diffDays = function(date) { 
-      var timeDiff = Math.abs(date.getTime() - this.getTime());
-      var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      const timeDiff = Math.abs(date.getTime() - this.getTime());
+      const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
       return diffDays;
   }
   Date.prototype.addDays = function(days)
   {
-      var dat = new Date(this.valueOf());
+      const dat = new Date(this.valueOf());
       dat.setDate(dat.getDate() + days);
       return dat;
   }
-  Date.prototype.upto= function(endDate) {
+  Date.prototype.upto = function(endDate) {
       var d;
       var date;
       var dates = [];
-      var days = this.diffDays(endDate);
+      var start = new Date(this.getFullYear(), 1, 1);
+      var end = new Date(endDate.getFullYear(), 12, 31);
+      var days = start.diffDays(end);
       for (d = 0; d < days; d = d + 365) { 
-          date = this.addDays(d);
+          date = start.addDays(d);
           dates.push(date);
       }
       return dates;
@@ -29,7 +31,7 @@ function drawGraph() {
   companies.xebeo = (new Date(2002, 7, 1)).upto(new Date(2005, 7, 1));
   companies.roundbox = (new Date(2005, 7, 1)).upto(new Date(2008, 7, 1));
   companies.mesh = (new Date(2008, 7, 1)).upto(new Date(2012, 7, 1));
-  companies.konnect2 = (new Date(2012, 7, 1)).upto(new Date(2013, 12, 1));
+  companies.konnect2 = (new Date(2012, 7, 1)).upto(new Date(2014, 1, 1));
   companies.betterpath = (new Date(2014, 1, 1)).upto(new Date(2016, 2, 1));
   data.companies = [
       { name: "Bell Labs ", dates: companies.belllabs },
@@ -40,12 +42,12 @@ function drawGraph() {
       { name: "Betterpath ", dates: companies.betterpath }
   ];
 
-  var concatDates = function() {
-      result = arguments[0]
+  const concatDates = function() {
+      var combined = arguments[0];
       for (var i = 1; i < arguments.length; i++) {
-        result = result.concat(arguments[i]);
+        combined = combined.concat(arguments[i]);
       }
-      return result;
+      return combined;
   }
 
   ranges.lang = {};
@@ -122,11 +124,11 @@ function drawGraph() {
       { name: "Android ", dates: ranges.os.android },
   ];
 
-  var content = document.getElementById('content');
+  const content = document.getElementById('content');
 
-  var getChart = function() { 
-      var color = d3.scale.category20();
-      var chart = d3.chart.eventDrops()
+  const getChart = function() { 
+      const color = d3.scale.category20();
+      const chart = d3.chart.eventDrops()
       .width(1000)
       .eventLineColor(function(datum, index) { 
           return color(index);
@@ -136,8 +138,8 @@ function drawGraph() {
       return chart;
   }
 
-  var setData = function(name, data) { 
-      var chart = getChart();
+  const setData = function(name, data) { 
+      const chart = getChart();
       var element = d3.select(content).append('div');
       element.append('h2').html(name);
       element = element.append('div').datum(data);
