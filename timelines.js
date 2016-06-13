@@ -144,7 +144,7 @@ function drawGraph() {
       chart(element);
   }
 
-  setData("Companies", data.companies);
+  //setData("Companies", data.companies);
   setData("Operating Systems", data.os);
   setData("Programming Languages", data.lang);
   setData("Scripting Tools", data.script);
