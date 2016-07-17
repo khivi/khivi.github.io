@@ -154,7 +154,10 @@ function drawGraph() {
   d3.select(content).selectAll('svg g.extremum').remove();
   d3.select(content).selectAll('svg').attr('width', 800);
   d3.select(content).selectAll('svg').attr('transform', 'translate(-90, 0)');
+  d3.select(content).selectAll('svg g.labels').attr('transform', 'translate(-90, 0)');
+  d3.select(content).selectAll('svg g.axes').attr('transform', 'translate(120, 55)'); 
   d3.select(content).selectAll('svg g.drops-container').attr('clip-path', '');
+  d3.select(content).selectAll('svg g.drops-container').attr('transform', 'translate(-90, 0)');
 }
 
 window.onload=drawGraph;
