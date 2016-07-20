@@ -34,11 +34,13 @@ body {
 	// background-image: linear-gradient(to bottom, #FFFFFF 0%, #AFCAD0 100%);
 }
 
+// Amazon iframe link
 @media (min-width: 320px) {
 
 	iframe {
 		max-width: 300px;
 	}
+
 }
 @media (min-width: 480px) {
 
@@ -173,6 +175,11 @@ h1.masthead-brand {
 	margin-top: 16px;
 }
 
+@media (min-width: 320px) {
+	.cover-heading {
+		font-size: 14px;
+    }
+}
 
 
 @media (min-width: 480px) {
@@ -184,7 +191,11 @@ h1.masthead-brand {
 	.masthead-nav > li > a {
 		padding: 10px 2px 3px 2px;
 		font-size: 14px;
+        
 	}
+	.cover-heading {
+		font-size: 14px;
+    }
 	.profile {
 		float: right;
 		margin: 20px 10px 20px 30px;
@@ -217,6 +228,9 @@ h1.masthead-brand {
 		padding: 10px 10px 3px 10px;
 		font-size: 16px;
 	}
+	.cover-heading {
+		font-size: 16px;
+    }
 	.cover {
 		padding: 0 30px;
 	}
