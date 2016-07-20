@@ -103,6 +103,8 @@ body {
 	padding:0;
 	margin:0;
 	margin-bottom: 5px;
+    border-top: 1px solid #581a08;
+    border-bottom: 1px solid #581a08;
 	color: rgba(88, 26, 8, .8);
 }
 .masthead {
@@ -146,17 +148,12 @@ h1.masthead-brand {
   border-bottom-color: #581a08;
 }
 
-.nav-pills > li > a:hover,
-.nav-pills > li > a:focus {
+.writing-tabs > li > a:hover,
+.writing-tabs > li > a:focus,
+.writing-tabs > li.active > a,
+.writing-tabs > li.active > a:hover,
+.writing-tabs > li.active > a:focus {
   background-color: transparent;
-  border-bottom-color: #581a08;
-  border-bottom-color: rgba(88, 26, 8, .8);
-}
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
-  background-color: transparent;
-  color: #581a08;
   border-bottom-color: #581a08;
   border-bottom-color: rgba(88, 26, 8, .8);
 }
@@ -246,6 +243,9 @@ h1.masthead-brand {
   .cover-container {
     width: 700px;
   }
+	.cover-heading {
+		font-size: 30px;
+    }
 }
 
 
