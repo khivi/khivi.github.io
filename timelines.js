@@ -33,6 +33,7 @@ function drawGraph() {
   companies.mesh = (new Date(2008, 7, 1)).upto(new Date(2012, 7, 1));
   companies.konnect2 = (new Date(2012, 7, 1)).upto(new Date(2014, 1, 1));
   companies.betterpath = (new Date(2014, 1, 1)).upto(new Date(2016, 2, 1));
+  companies.emissary = (new Date(2016, 8, 1)).upto(new Date());
   data.companies = [
       { name: "Bell Labs ", dates: companies.belllabs },
       { name: "Xebeo ", dates: companies.xebeo },
@@ -76,7 +77,8 @@ function drawGraph() {
   ranges.script.python1 = (new Date(1992, 5, 1)).upto(new Date(1994, 7, 1));
   ranges.script.python2 = companies.xebeo;
   ranges.script.python3 = (new Date(2016, 1, 1)).upto(new Date());
-  ranges.script.python = concatDates(ranges.script.python1, ranges.script.python2, ranges.script.python3);
+  ranges.script.python4 = companies.emissary
+  ranges.script.python = concatDates(ranges.script.python1, ranges.script.python2, ranges.script.python3, ranges.script.python4);
   ranges.script.perl = concatDates(companies.belllabs,  companies.roundbox);
   ranges.script.ruby = companies.mesh;
   ranges.script.ansible = concatDates(companies.konnect2,  companies.betterpath);
@@ -92,7 +94,7 @@ function drawGraph() {
   ranges.tools.sablime = companies.belllabs;
   ranges.tools.perforce = companies.xebeo;
   ranges.tools.bugzilla = concatDates(companies.xebeo, companies.roundbox);
-  ranges.tools.git = concatDates(companies.mesh, companies.konnect2, companies.betterpath);
+  ranges.tools.git = concatDates(companies.mesh, companies.konnect2, companies.betterpath, companies.emissary);
   ranges.tools.assembla = concatDates(companies.konnect2, companies.betterpath);
   ranges.tools.asana = companies.betterpath;
   data.tools = [
@@ -151,13 +153,13 @@ function drawGraph() {
   setData("Programming Languages", data.lang);
   setData("Scripting Tools", data.script);
   setData("Process Tools", data.tools);
-  d3.select(content).selectAll('svg g.extremum').remove();
-  d3.select(content).selectAll('svg').attr('width', 800);
-  d3.select(content).selectAll('svg').attr('transform', 'translate(-90, 0)');
-  d3.select(content).selectAll('svg g.labels').attr('transform', 'translate(-90, 0)');
-  d3.select(content).selectAll('svg g.axes').attr('transform', 'translate(120, 55)'); 
-  d3.select(content).selectAll('svg g.drops-container').attr('clip-path', '');
-  d3.select(content).selectAll('svg g.drops-container').attr('transform', 'translate(-90, 0)');
+  //d3.select(content).selectAll('svg g.extremum').remove();
+  //d3.select(content).selectAll('svg').attr('width', 800);
+  //d3.select(content).selectAll('svg').attr('transform', 'translate(-90, 0)');
+  d3.select(content).selectAll('svg g.labels').attr('transform', 'translate(-90, 45)');
+  //d3.select(content).selectAll('svg g.axes').attr('transform', 'translate(120, 55)'); 
+  //d3.select(content).selectAll('svg g.drops-container').attr('clip-path', '');
+  //d3.select(content).selectAll('svg g.drops-container').attr('transform', 'translate(-90, 0)');
 }
 
 window.onload=drawGraph;
