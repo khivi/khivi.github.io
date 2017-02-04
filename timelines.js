@@ -32,8 +32,10 @@ function drawGraph() {
   companies.roundbox = (new Date(2005, 7, 1)).upto(new Date(2008, 7, 1));
   companies.mesh = (new Date(2008, 7, 1)).upto(new Date(2012, 7, 1));
   companies.konnect2 = (new Date(2012, 7, 1)).upto(new Date(2014, 1, 1));
-  companies.betterpath = (new Date(2014, 1, 1)).upto(new Date(2016, 2, 1));
-  companies.emissary = (new Date(2016, 8, 1)).upto(new Date());
+  companies.betterpath = (new Date(2014, 1, 1)).upto(new Date(2016, 31, 1));
+  companies.emissary = (new Date(2016, 8, 1)).upto(new Date(2017, 2, 10));
+  companies.netcore = (new Date(2016, 2, 1)).upto(new Date(2011, 7, 31));
+  companies.verne = (new Date(2017, 2, 1)).upto(new Date());
   data.companies = [
       { name: "Bell Labs ", dates: companies.belllabs },
       { name: "Xebeo ", dates: companies.xebeo },
@@ -61,14 +63,16 @@ function drawGraph() {
   ranges.lang.co = (new Date(2008, 7, 1)).upto(new Date(2010, 7, 1));
   ranges.lang.java = companies.mesh;
   ranges.lang.scala = concatDates(companies.konnect2, companies.betterpath);
+  ranges.lang.php = companies.verne;
   data.lang = [
       { name: "Basic ", dates: ranges.lang.basic },
-      { name: "Fortran ", dates: ranges.lang.fortran },
-      { name: "Pascal ", dates: ranges.lang.pascal },
       { name: "C ", dates: ranges.lang.c },
       { name: "C++ ", dates: ranges.lang.cp },
-      { name: "Objective-C ", dates: ranges.lang.co },
+      { name: "Fortran ", dates: ranges.lang.fortran },
       { name: "Java ", dates: ranges.lang.java },
+      { name: "Objective-C ", dates: ranges.lang.co },
+      { name: "Pascal ", dates: ranges.lang.pascal },
+      { name: "Php ", dates: ranges.lang.php },
       { name: "Scala ", dates: ranges.lang.scala }
   ];
 
@@ -81,13 +85,13 @@ function drawGraph() {
   ranges.script.python = concatDates(ranges.script.python1, ranges.script.python2, ranges.script.python3, ranges.script.python4);
   ranges.script.perl = concatDates(companies.belllabs,  companies.roundbox);
   ranges.script.ruby = companies.mesh;
-  ranges.script.ansible = concatDates(companies.konnect2,  companies.betterpath);
+  ranges.script.ansible = concatDates(companies.konnect2,  companies.betterpath, companies.verne);
   data.script = [
+      { name: "Ansible ", dates: ranges.script.ansible },
       { name: "Bash ", dates: ranges.script.bash },
-      { name: "Python ", dates: ranges.script.python },
       { name: "Perl ", dates: ranges.script.perl },
-      { name: "Ruby ", dates: ranges.script.ruby },
-      { name: "Ansible ", dates: ranges.script.ansible }
+      { name: "Python ", dates: ranges.script.python },
+      { name: "Ruby ", dates: ranges.script.ruby }
   ];
 
   ranges.tools = {};
@@ -97,13 +101,17 @@ function drawGraph() {
   ranges.tools.git = concatDates(companies.mesh, companies.konnect2, companies.betterpath, companies.emissary);
   ranges.tools.assembla = concatDates(companies.konnect2, companies.betterpath);
   ranges.tools.asana = companies.betterpath;
+  ranges.tools.trello = concatDates(companies.betterpath, companies.netcore);
+  ranges.tools.jira = companies.emissary;
   data.tools = [
-      { name: "Sablime ", dates: ranges.tools.sablime },
-      { name: "Perforce ", dates: ranges.tools.perforce },
+      { name: "Asana ", dates: ranges.tools.asana },
+      { name: "Assembla ", dates: ranges.tools.assembla },
       { name: "Bugzilla ", dates: ranges.tools.bugzilla },
       { name: "Git ", dates: ranges.tools.git },
-      { name: "Assembla ", dates: ranges.tools.assembla },
-      { name: "Asana ", dates: ranges.tools.asana }
+      { name: "Jira ", dates: ranges.tools.jira },
+      { name: "Perforce ", dates: ranges.tools.perforce },
+      { name: "Sablime ", dates: ranges.tools.sablime },
+      { name: "Trello ", dates: ranges.tools.trello }
   ];
 
   ranges.os = {};
@@ -116,14 +124,14 @@ function drawGraph() {
   ranges.os.ios = (new Date(2008, 7, 1)).upto(new Date(2010, 7, 1));
   ranges.os.android = (new Date(2016, 1, 1)).upto(new Date(2016, 6, 1));
   data.os = [
-      { name: "ZX Spectrum ", dates: ranges.os.spectrum },
-      { name: "Unix System V ", dates: ranges.os.systemV },
-      { name: "Linux ", dates: ranges.os.linux },
-      { name: "Solaris ", dates: ranges.os.solaris },
-      { name: "FreeBSD ", dates: ranges.os.freebsd },
-      { name: "OS X ", dates: ranges.os.osx },
-      { name: "IOS ", dates: ranges.os.ios },
       { name: "Android ", dates: ranges.os.android },
+      { name: "FreeBSD ", dates: ranges.os.freebsd },
+      { name: "IOS ", dates: ranges.os.ios },
+      { name: "Linux ", dates: ranges.os.linux },
+      { name: "OS X ", dates: ranges.os.osx },
+      { name: "Solaris ", dates: ranges.os.solaris },
+      { name: "Unix System V ", dates: ranges.os.systemV },
+      { name: "ZX Spectrum ", dates: ranges.os.spectrum }
   ];
 
   const content = document.getElementById('content');
