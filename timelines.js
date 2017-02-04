@@ -34,7 +34,7 @@ function drawGraph() {
   companies.konnect2 = (new Date(2012, 7, 1)).upto(new Date(2014, 1, 1));
   companies.betterpath = (new Date(2014, 1, 1)).upto(new Date(2016, 31, 1));
   companies.emissary = (new Date(2016, 8, 1)).upto(new Date(2017, 2, 10));
-  companies.netcore = (new Date(2016, 2, 1)).upto(new Date(2011, 7, 31));
+  companies.netcore = (new Date(2016, 2, 1)).upto(new Date(2016, 7, 31));
   companies.verne = (new Date(2017, 2, 1)).upto(new Date());
   data.companies = [
       { name: "Bell Labs ", dates: companies.belllabs },
