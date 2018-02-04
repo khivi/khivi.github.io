@@ -99,7 +99,7 @@ function drawGraph() {
       { name: "Python ", dates: ranges.script.python },
       { name: "Ruby ", dates: ranges.script.ruby },
       { name: "Docker ", dates: ranges.script.docker },
-      { name: "Kubrenetes ", dates: ranges.script.k8s },
+      { name: "Kubernetes ", dates: ranges.script.k8s },
   ];
 
   ranges.tools = {};
