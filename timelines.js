@@ -27,16 +27,18 @@ function drawGraph() {
   var ranges = {};
   var companies = {};
 
-  companies.belllabs = (new Date(1996, 7, 1)).upto(new Date(2002, 7, 1));
-  companies.xebeo = (new Date(2002, 7, 1)).upto(new Date(2005, 7, 1));
-  companies.roundbox = (new Date(2005, 7, 1)).upto(new Date(2008, 7, 1));
-  companies.mesh = (new Date(2008, 7, 1)).upto(new Date(2012, 7, 1));
-  companies.konnect2 = (new Date(2012, 7, 1)).upto(new Date(2014, 1, 1));
-  companies.betterpath = (new Date(2014, 1, 1)).upto(new Date(2016, 31, 1));
-  companies.emissary = (new Date(2016, 8, 1)).upto(new Date(2017, 2, 10));
-  companies.netcore = (new Date(2016, 2, 1)).upto(new Date(2016, 7, 31));
-  companies.verne = (new Date(2017, 2, 1)).upto(new Date());
-  companies.target = (new Date(2017, 2, 13)).upto(new Date());
+  var today = new Date();
+
+  companies.belllabs = new Date(1996, 7, 1).upto(new Date(2002, 7, 1));
+  companies.xebeo = new Date(2002, 7, 1).upto(new Date(2005, 7, 1));
+  companies.roundbox = new Date(2005, 7, 1).upto(new Date(2008, 7, 1));
+  companies.mesh = new Date(2008, 7, 1).upto(new Date(2012, 7, 1));
+  companies.konnect2 = new Date(2012, 7, 1).upto(new Date(2014, 1, 1));
+  companies.betterpath = new Date(2014, 1, 1).upto(new Date(2016, 31, 1));
+  companies.emissary = new Date(2016, 8, 1).upto(new Date(2017, 2, 10));
+  companies.netcore = new Date(2016, 2, 1).upto(new Date(2016, 7, 31));
+  companies.verne = new Date(2017, 2, 1).upto(today);
+  companies.target = new Date(2017, 2, 13).upto(today);
   data.companies = [
       { name: "Bell Labs ", dates: companies.belllabs },
       { name: "Xebeo ", dates: companies.xebeo },
@@ -57,13 +59,13 @@ function drawGraph() {
   }
 
   ranges.lang = {};
-  ranges.lang.basic = (new Date(1987, 7, 1)).upto(new Date(1990, 1, 1));
-  ranges.lang.fortran = (new Date(1990, 7, 1)).upto(new Date(1990, 12, 1));
-  ranges.lang.pascal = (new Date(1991, 7, 1)).upto(new Date(1992, 7, 1));
-  ranges.lang.cschool = (new Date(1992, 7, 1)).upto(new Date(1996, 7, 1));
+  ranges.lang.basic = new Date(1987, 7, 1).upto(new Date(1990, 1, 1));
+  ranges.lang.fortran = new Date(1990, 7, 1).upto(new Date(1990, 12, 1));
+  ranges.lang.pascal = new Date(1991, 7, 1).upto(new Date(1992, 7, 1));
+  ranges.lang.cschool = new Date(1992, 7, 1).upto(new Date(1996, 7, 1));
   ranges.lang.c = concatDates(ranges.lang.cschool, companies.xebeo);
   ranges.lang.cp = concatDates(companies.belllabs, companies.roundbox, companies.target);
-  ranges.lang.co = (new Date(2008, 7, 1)).upto(new Date(2010, 7, 1));
+  ranges.lang.co = new Date(2008, 7, 1).upto(new Date(2010, 7, 1));
   ranges.lang.java = companies.mesh;
   ranges.lang.scala = concatDates(companies.konnect2, companies.betterpath);
   ranges.lang.php = companies.verne;
@@ -80,10 +82,10 @@ function drawGraph() {
   ];
 
   ranges.script = {};
-  ranges.script.bash = (new Date(1991, 7, 1)).upto(new Date());
-  ranges.script.python1 = (new Date(1992, 5, 1)).upto(new Date(1994, 7, 1));
+  ranges.script.bash = new Date(1991, 7, 1).upto(today);
+  ranges.script.python1 = new Date(1992, 5, 1).upto(new Date(1994, 7, 1));
   ranges.script.python2 = companies.xebeo;
-  ranges.script.python3 = (new Date(2016, 1, 1)).upto(new Date());
+  ranges.script.python3 = new Date(2016, 1, 1).upto(today);
   ranges.script.python4 = companies.emissary
   ranges.script.python5 = companies.target
   ranges.script.python = concatDates(ranges.script.python1, ranges.script.python2, ranges.script.python3, ranges.script.python4, ranges.script.python5);
@@ -123,14 +125,14 @@ function drawGraph() {
   ];
 
   ranges.os = {};
-  ranges.os.spectrum = (new Date(1987, 7, 1)).upto(new Date(1990, 1, 1));
-  ranges.os.systemV = (new Date(1990, 7, 1)).upto(new Date(1996, 1, 1));
-  ranges.os.solaris = (new Date(1996, 7, 1)).upto(new Date(2002, 12, 1));
-  ranges.os.freebsd = (new Date(2002, 7, 1)).upto(new Date(2005, 12, 1));
-  ranges.os.linux = (new Date(1994, 7, 1)).upto(new Date());
-  ranges.os.osx = (new Date(2002, 7, 1)).upto(new Date());
-  ranges.os.ios = (new Date(2008, 7, 1)).upto(new Date(2010, 7, 1));
-  ranges.os.android = (new Date(2016, 1, 1)).upto(new Date(2016, 6, 1));
+  ranges.os.spectrum = new Date(1987, 7, 1).upto(new Date(1990, 1, 1));
+  ranges.os.systemV = new Date(990, 7, 1).upto(new Date(1996, 1, 1));
+  ranges.os.solaris = new Date(1996, 7, 1).upto(new Date(2002, 12, 1));
+  ranges.os.freebsd = new Date(2002, 7, 1).upto(new Date(2005, 12, 1));
+  ranges.os.linux = new Date(1994, 7, 1).upto(today);
+  ranges.os.osx = new Date(2002, 7, 1).upto(today);
+  ranges.os.ios = new Date(2008, 7, 1).upto(new Date(2010, 7, 1));
+  ranges.os.android = new Date(2016, 1, 1).upto(new Date(2016, 6, 1));
   data.os = [
       { name: "Android ", dates: ranges.os.android },
       { name: "FreeBSD ", dates: ranges.os.freebsd },
