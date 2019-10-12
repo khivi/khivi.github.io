@@ -111,7 +111,7 @@ function drawGraph() {
   ranges.tools.git = concatDates(companies.mesh, companies.konnect2, companies.betterpath, companies.emissary);
   ranges.tools.assembla = concatDates(companies.konnect2, companies.betterpath);
   ranges.tools.asana = companies.betterpath;
-  ranges.tools.trello = concatDates(companies.betterpath, companies.netcore, companies.target);
+  ranges.tools.trello = concatDates(companies.betterpath, companies.netcore);
   ranges.tools.jira = concatDates(companies.emissary, companies.target);
   data.tools = [
       { name: "Asana ", dates: ranges.tools.asana },
