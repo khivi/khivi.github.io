@@ -1,21 +1,25 @@
+var global = window; // https://github.com/marmelab/EventDrops/issues/258
+
 function drawGraph() {
   Date.prototype.diffDays = function(date) { 
       const timeDiff = Math.abs(date.getTime() - this.getTime());
       const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
       return diffDays;
   }
+
   Date.prototype.addDays = function(days)
   {
       const dat = new Date(this.valueOf());
       dat.setDate(dat.getDate() + days);
       return dat;
   }
+
   Date.prototype.upto = function(endDate) {
       var d;
       var date;
       var dates = [];
-      var start = new Date(this.getFullYear(), 1, 1);
-      var end = new Date(endDate.getFullYear(), 12, 31);
+      const start = new Date(this.getFullYear(), 1, 1);
+      const end = new Date(endDate.getFullYear(), 12, 31);
       var days = start.diffDays(end);
       for (d = 0; d < days; d = d + 365) { 
           date = start.addDays(d);
@@ -23,12 +27,22 @@ function drawGraph() {
       }
       return dates;
   } 
+
+  const concatDates = function() {
+      var combined = arguments[0];
+      for (var i = 1; i < arguments.length; i++) {
+        combined = combined.concat(arguments[i]);
+      }
+      return combined;
+  }
+
   var data = {};
   var ranges = {};
   var companies = {};
 
-  var start = new Date(1985,1,1);
-  var today = new Date();
+  const start = new Date(1985,1,1);
+  const today = new Date();
+  const today1Year = new Date().setFullYear(today.getFullYear() + 1);
 
   companies.belllabs = new Date(1996, 7, 1).upto(new Date(2002, 7, 1));
   companies.xebeo = new Date(2002, 7, 1).upto(new Date(2005, 7, 1));
@@ -53,13 +67,6 @@ function drawGraph() {
       { name: 'Target ', dates: companies.target },
   ];
 
-  const concatDates = function() {
-      var combined = arguments[0];
-      for (var i = 1; i < arguments.length; i++) {
-        combined = combined.concat(arguments[i]);
-      }
-      return combined;
-  }
 
   ranges.lang = {};
   ranges.lang.basic = new Date(1987, 7, 1).upto(new Date(1990, 1, 1));
@@ -104,7 +111,7 @@ function drawGraph() {
       { name: 'Ruby ', dates: ranges.script.ruby },
       { name: 'Docker ', dates: ranges.script.docker },
       { name: 'Kubernetes ', dates: ranges.script.k8s },
-      { name: 'GCP ', dates: ranges.script.gcp },
+      { name: 'Google Cloud ', dates: ranges.script.gcp },
       { name: 'AWS ', dates: ranges.script.aws },
   ];
 
@@ -153,30 +160,56 @@ function drawGraph() {
   const content = document.getElementById('content');
 
   const getChart = function() { 
-      const color = d3.scale.category20();
-      const chart = d3.chart.eventDrops()
-      .width(1000)
-      .eventLineColor(function(datum, index) { 
-          return color(index);
-      })
-      .start(start)
-      .end(today)
+      const color = d3.scaleOrdinal(d3.schemeAccent);
+      const chart = eventDrops({
+        d3,
+        drop: {
+          date: d => new Date(d.date),
+        },
+        zoom: false,
+        range: {
+          start: start,
+          end: today1Year,
+        },
+        axis: {
+          formats: {
+            year: '%y',
+          },
+        },
+        bound: { 
+          format: d3.timeFormat('%Y'),
+        },
+        label: {
+          text: d => `${d.name} (${d.data.length} years)`,
+        },
+      });
       return chart;
   }
 
   const setData = function(name, data) { 
+      const chartData = data.map(d => ({
+        name: d.name,
+        data: d.dates.map(date => ({"date": date})),
+      }));
       const chart = getChart();
-      var element = d3.select(content).append('div');
-      element.append('h2').html(name);
-      element = element.append('div').datum(data);
-      chart(element);
+      d3.select(content)
+		.append('div')
+        .append('h2')
+        .html(name)
+        .append('div')
+        .attr('id', name);
+
+      const div = document.getElementById(name);
+      d3.select(div)
+    	.data([chartData])
+    	.call(chart);
   }
 
   //setData("Companies", data.companies);
   setData('Operating Systems', data.os);
   setData('Programming Languages', data.lang);
-  setData('DevOps Tools', data.script);
-  setData('Planning Tools', data.tools);
+  setData('DevOps', data.script);
+  setData('Product', data.tools);
   //d3.select(content).selectAll('svg g.extremum').remove();
   //d3.select(content).selectAll('svg').attr('width', 800);
   //d3.select(content).selectAll('svg').attr('transform', 'translate(-90, 0)');
