@@ -12,6 +12,7 @@ function drawGraph() {
   chart.maskBullets = false;
 
   var colorSet = new am4core.ColorSet();
+  colorSet.step = 5;
 
   chart.dateFormatter.inputDateFormat = "yyyy-MM";
   chart.dateFormatter.dateFormat = "yyyy-MM";
